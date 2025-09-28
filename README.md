@@ -27,6 +27,9 @@
 <img width="624" height="356" alt="Picture1" src="https://github.com/user-attachments/assets/c3f8f7fd-6ab7-4583-a1cf-ec0b1d6251d9" />
 <img width="624" height="346" alt="Picture5" src="https://github.com/user-attachments/assets/7837497d-5b0b-4b80-9a0d-c9a56ecf02c7" />
 <img width="793" height="453" alt="Game stream form" src="https://github.com/user-attachments/assets/b85b1362-2592-4483-9180-b20f057f1b1f" />
+<img width="415" height="307" alt="Admin chatbot" src="https://github.com/user-attachments/assets/edcabb08-d7f1-4b6c-8582-30c205ca1544" />
+<img width="994" height="542" alt="chatbot form" src="https://github.com/user-attachments/assets/3737f934-9c1e-417e-b1a8-aee288a2c8ad" />
+<img width="973" height="466" alt="About us frame" src="https://github.com/user-attachments/assets/47b3e029-99fc-4493-bf0f-20396002b009" />
 
 
 
