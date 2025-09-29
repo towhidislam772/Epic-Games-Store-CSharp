@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
@@ -337,7 +337,7 @@ namespace WindowsFormsApp3
         //Update Game
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtGameID.Text))
+            if (string.IsNullOrWhiteSpace(txtGameID1.Text))
             {
                 MessageBox.Show("⚠️ Select a game first.");
                 return;
@@ -345,44 +345,51 @@ namespace WindowsFormsApp3
 
             try
             {
-                if (!int.TryParse(txtGameID.Text, out int gameId))
+                if (!int.TryParse(txtGameID1.Text, out int gameId))
                 {
                     MessageBox.Show("⚠️ Invalid Game ID.");
                     return;
                 }
 
-                int price = int.TryParse(txtPrice.Text, out var tempPrice) ? tempPrice : 0;
-                int quantity = int.TryParse(txtQuantity.Text, out var tempQty) ? tempQty : 0;
+                decimal price;
+                if (!decimal.TryParse(txtPrice1.Text, out price))
+                {
+                    MessageBox.Show("⚠️ Please enter a valid price (e.g., 29.99).");
+                    return;
+                }
+                int quantity = int.TryParse(txtQuantity1.Text, out var tempQty) ? tempQty : 0;
 
                 string query = @"
-                               UPDATE Games SET Name = @Name,
-                                                Price = @Price,
-                                                ImagePath = @ImagePath,
-                                                Type = @Type,
-                                                Description = @Description,
-                                                Windows = @Windows,
-                                                Space = @Space,
-                                                GPU = @GPU,
-                                                Quantity = @Quantity,
-                                                OwnerEmail = @OwnerEmail,
-                                                CreatedAt = @CreatedAt
-                                            WHERE GameID = @GameID";
+            UPDATE Games 
+            SET 
+                Name = @Name,
+                Price = @Price,
+                ImagePath = @ImagePath,
+                Type = @Type,
+                Description = @Description,
+                Windows = @Windows,
+                Space = @Space,
+                GPU = @GPU,
+                Quantity = @Quantity,
+                OwnerEmail = @OwnerEmail,
+                CreatedAt = @CreatedAt
+            WHERE GameID = @GameID";
 
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@GameID", gameId);
-                    cmd.Parameters.AddWithValue("@Name", txtName.Text.Trim());
+                    cmd.Parameters.AddWithValue("@Name", txtName1.Text.Trim());
                     cmd.Parameters.AddWithValue("@Price", price);
-                    cmd.Parameters.AddWithValue("@ImagePath", string.IsNullOrEmpty(pictureBox.ImageLocation) ? (object)DBNull.Value : pictureBox.ImageLocation);
-                    cmd.Parameters.AddWithValue("@Type", txtType.Text.Trim());
-                    cmd.Parameters.AddWithValue("@Description", txtDescription.Text.Trim());
-                    cmd.Parameters.AddWithValue("@Windows", txtWindows.Text.Trim());
-                    cmd.Parameters.AddWithValue("@Space", txtSpace.Text.Trim());
-                    cmd.Parameters.AddWithValue("@GPU", txtGPU.Text.Trim());
+                    cmd.Parameters.AddWithValue("@ImagePath", string.IsNullOrEmpty(pictureBox2.ImageLocation) ? (object)DBNull.Value : pictureBox2.ImageLocation);
+                    cmd.Parameters.AddWithValue("@Type", txtType1.Text.Trim());
+                    cmd.Parameters.AddWithValue("@Description", txtDescription1.Text.Trim());
+                    cmd.Parameters.AddWithValue("@Windows", txtWindows1.Text.Trim());
+                    cmd.Parameters.AddWithValue("@Space", txtSpace1.Text.Trim());
+                    cmd.Parameters.AddWithValue("@GPU", txtGPU1.Text.Trim());
                     cmd.Parameters.AddWithValue("@Quantity", quantity);
-                    cmd.Parameters.AddWithValue("@OwnerEmail", txtEmail.Text.Trim());
-                    cmd.Parameters.AddWithValue("@CreatedAt", dateTimePicker.Value);
+                    cmd.Parameters.AddWithValue("@OwnerEmail", txtEmail1.Text.Trim());
+                    cmd.Parameters.AddWithValue("@CreatedAt", dateTimePicker1.Value);
 
                     conn.Open();
                     int rowsAffected = cmd.ExecuteNonQuery();
